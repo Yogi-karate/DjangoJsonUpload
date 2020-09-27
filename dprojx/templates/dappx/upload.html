@@ -1,0 +1,15 @@
+{% extends "dappx/base.html" %}
+{% load static %}
+{% block body_block %}
+  <div class="container">
+    <div class="jumbotron">
+        <h3>Upload JSON File(Other types won't work)</h3>
+<form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" name="" value="Upload">
+        </form>
+        
+    </div>
+  </div>
+{% endblock %}
