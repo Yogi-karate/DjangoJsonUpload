@@ -67,11 +67,17 @@ def upload_post(request,id=0):
         print(request.FILES)
         if 'file' in request.FILES:
             x = request.FILES['file']
-            post_data = json.load(x)
-            for i in post_data:
-                post = Post(user_id = i['userId'],title = i['title'],body = i['body'])
-                post.save()
-                print(i)
-        print("--------------------------------------")
-        print("=======XXXXXXXXXXX=========X===================")
-        return render(request,"dappx/upload.html",{'form':form})
+            m = str(x)
+            print(m)
+            n = m.split('.')
+            if n[1] == 'json':
+                post_data = json.load(x)
+                for i in post_data:
+                    post = Post(user_id = i['userId'],title = i['title'],body = i['body'])
+                    post.save()
+                    print(i)
+                print("--------------------------------------")
+                print("=======XXXXXXXXXXX=========X===================")
+                return render(request,"dappx/upload.html",{'form':form,'mes':False,'tex':"Data Uploaded Successfully"})
+            return render(request,"dappx/upload.html",{'form':form,'mes':True,'tex':"Enter Only JSON File"})
+        return render(request,"dappx/upload.html",{'form':form,'mes':False,'tex':''})
