@@ -73,9 +73,8 @@ def upload_post(request,id=0):
             if n[1] == 'json':
                 post_data = json.load(x)
                 for i in post_data:
-                    post = Post(user_id = i['userId'],title = i['title'],body = i['body'])
-                    post.save()
-                    print(i)
+                    post = Post(user_id = i['userId'],title = i['title'],body = i['body'],id= i['id'])
+                    j = post.save()
                 print("--------------------------------------")
                 print("=======XXXXXXXXXXX=========X===================")
                 return render(request,"dappx/upload.html",{'form':form,'mes':False,'tex':"Data Uploaded Successfully"})
