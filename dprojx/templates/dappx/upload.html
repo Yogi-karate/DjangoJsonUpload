@@ -1,8 +1,10 @@
 {% extends "dappx/base.html" %}
 {% load static %}
 {% block body_block %}
+
   <div class="container">
     <div class="jumbotron">
+      {% if user.is_authenticated %}
         <h3>Upload JSON File</h3>
 <form enctype="multipart/form-data" method="POST">
           {% csrf_token %}
@@ -15,6 +17,10 @@
         {% if not mes%}
         <h4 style="color:green">{{tex}}</h4>
         {%endif%}
+        {% else %}
+        <h2 style="color:red">First reigster/login</h2>
+      {% endif %}
     </div>
   </div>
+
 {% endblock %}
