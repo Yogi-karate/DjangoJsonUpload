@@ -73,6 +73,8 @@ def upload_post(request,id=0):
             if n[1] == 'json':
                 post_data = json.load(x)
                 for i in post_data:
+                    if 'userId' not in i or 'id' not in i or 'title' not in i or 'body' not in i:
+                            return render(request,"dappx/upload.html",{'form':form,'mes':True,'tex':"make sure json file has title,body,user_id and id fields"})
                     post = Post(user_id = i['userId'],title = i['title'],body = i['body'],id= i['id'])
                     j = post.save()
                 print("--------------------------------------")
